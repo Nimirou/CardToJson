@@ -1,7 +1,8 @@
-const express = require("express");
-const router = express.Router();
-const appController = require("../controllers/appController.js");
-const multer = require("multer");
+// Description: This file contains all the routes for the application
+const express = require("express"),
+  router = express.Router(),
+  appController = require("../controllers/appController.js"),
+  multer = require("multer");
 
 // File Storage Engine
 const fileStorageEngine = multer.diskStorage({

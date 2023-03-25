@@ -1,17 +1,16 @@
-const cheerio = require("cheerio");
-const axios = require("axios");
-const qs = require("qs");
+const cheerio = require("cheerio"),
+  axios = require("axios"),
+  qs = require("qs");
 
 exports.uploadCard = async (req, res) => {
-  const vision = require("@google-cloud/vision");
+  const vision = require("@google-cloud/vision"),
+    // Creates a client
+    client = new vision.ImageAnnotatorClient(),
+    // Performs text detection on the local file
+    [result] = await client.textDetection(req.file.path),
+    detections = result.textAnnotations,
+    sCardName = detections[0].description.split("\n")[0];
 
-  // Creates a client
-  const client = new vision.ImageAnnotatorClient();
-
-  // Performs text detection on the local file
-  const [result] = await client.textDetection(req.file.path);
-  const detections = result.textAnnotations;
-  const sCardName = detections[0].description.split("\n")[0];
   let data = qs.stringify({
     x: 0,
     y: 0,
