@@ -10,7 +10,7 @@ exports.uploadCard = async (req, res) => {
     [result] = await client.textDetection(req.file.path),
     detections = result.textAnnotations,
     sCardName = detections[0].description.split("\n")[0];
-  res.send(sCardName);
+
   let data = qs.stringify({
     x: 0,
     y: 0,
