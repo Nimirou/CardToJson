@@ -1,7 +1,7 @@
 const cheerio = require("cheerio"),
   axios = require("axios"),
-  qs = require("qs");
-
+  qs = require("qs"),
+  https = require("https");
 exports.uploadCard = async (req, res) => {
   const vision = require("@google-cloud/vision"),
     // Creates a client
