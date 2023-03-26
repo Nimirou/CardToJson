@@ -23,7 +23,7 @@ exports.uploadCard = async (req, res) => {
     responseEncoding: "binary", //windows-1250
     method: "GET",
     headers: { "content-type": "application/x-www-form-urlencoded" },
-    url: "www.cernyrytir.cz/index.php3?akce=995",
+    url: "https://cernyrytir.cz/index.php3?akce=995",
   };
 
   callAxios(options);
