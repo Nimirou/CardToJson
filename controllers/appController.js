@@ -3,6 +3,7 @@ const cheerio = require("cheerio"),
   qs = require("qs"),
   https = require("https");
 exports.uploadCard = async (req, res) => {
+  console.log("TEST");
   const vision = require("@google-cloud/vision"),
     // Creates a client
     client = new vision.ImageAnnotatorClient({ keyFilename: "apikey.json" }),
