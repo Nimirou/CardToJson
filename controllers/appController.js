@@ -4,16 +4,20 @@ const cheerio = require("cheerio"),
   https = require("https"),
   vision = require("@google-cloud/vision");
 exports.uploadCard = async (req, res) => {
-  console.log("TEST");
+  async function processImage(filePath) {
+    const client = new vision.ImageAnnotatorClient({
+      keyFilename: "apikey.json",
+    });
 
-  const client = new vision.ImageAnnotatorClient({
-    keyFilename: "apikey.json",
-  });
-  console.log("client");
-  // Performs text detection on the local file
-  const [result] = await client.textDetection(req.file.path);
-  const detections = result.textAnnotations;
-  const sCardName = detections[0].description.split("\n")[0];
+    const [result] = await client.textDetection(filePath);
+    const detections = result.textAnnotations;
+    const sCardName = detections[0].description.split("\n")[0];
+
+    return sCardName;
+  }
+
+  // Example usage:
+  const sCardName = await processImage(req.file.path);
   console.log(sCardName);
   let data = qs.stringify({
     x: 0,
