@@ -5,7 +5,7 @@ const cheerio = require("cheerio"),
 exports.uploadCard = async (req, res) => {
   const vision = require("@google-cloud/vision"),
     // Creates a client
-    client = new vision.ImageAnnotatorClient(),
+    client = new vision.ImageAnnotatorClient({ keyFilename: "apikey.json" }),
     // Performs text detection on the local file
     [result] = await client.textDetection(req.file.path),
     detections = result.textAnnotations,
