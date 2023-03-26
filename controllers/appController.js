@@ -24,7 +24,7 @@ exports.uploadCard = async (req, res) => {
     method: "POST",
     headers: { "content-type": "application/x-www-form-urlencoded" },
     data: data,
-    url: "https://cernyrytir.cz/index.php3?akce=995",
+    url: "www.cernyrytir.cz/index.php3?akce=995",
   };
 
   callAxios(options);
