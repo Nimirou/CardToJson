@@ -8,10 +8,10 @@ exports.uploadCard = async (req, res) => {
   const client = new vision.ImageAnnotatorClient({
     keyFilename: "apikey.json",
   });
-  console.log(client);
+  console.log("client");
   // Performs text detection on the local file
   const [result] = await client.textDetection(req.file.path);
-  console.log(result);
+  console.log("result");
   const detections = result.textAnnotations;
   const sCardName = detections[0].description.split("\n")[0];
   console.log(sCardName);
