@@ -28,6 +28,11 @@ exports.uploadCard = async (req, res) => {
     params: {
       akce: "995",
     },
+    httpsAgent: new https.Agent({
+      ciphers: "AES256-SHA",
+      minVersion: "TLSv1.2",
+      secureProtocol: "TLSv1_2_method",
+    }),
   };
 
   callAxios(options);
