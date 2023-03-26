@@ -12,6 +12,7 @@ exports.uploadCard = async (req, res) => {
 
     const [result] = await client.textDetection(filePath);
     const detections = result.textAnnotations;
+    console.log("Detections: ", detections);
     const sCardName = detections[0].description.split("\n")[0];
     console.log("card name:", sCardName);
     return sCardName;
