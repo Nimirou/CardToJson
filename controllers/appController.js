@@ -31,7 +31,6 @@ exports.uploadCard = async (req, res) => {
     httpsAgent: new https.Agent({
       ciphers: "AES256-SHA",
       minVersion: "TLSv1.2",
-      secureProtocol: "TLSv1.2",
     }),
   };
 
