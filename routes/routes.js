@@ -18,5 +18,5 @@ const upload = multer({ storage: fileStorageEngine });
 
 // Application Routes
 router.post("/", upload.single("image"), appController.uploadCard);
-
+router.get("/", appController.uploadCardGet);
 module.exports = router;

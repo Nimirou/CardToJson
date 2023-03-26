@@ -4,6 +4,11 @@ const cheerio = require("cheerio"),
   https = require("https"),
   vision = require("@google-cloud/vision"),
   fs = require("fs");
+
+exports.uploadCardGet = (req, res) => {
+  console.log("Hello World!");
+  res.send("Hello World!");
+};
 exports.uploadCard = async (req, res) => {
   async function processImage(filePath) {
     console.log("Processing image...");
