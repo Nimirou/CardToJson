@@ -21,9 +21,13 @@ exports.uploadCard = async (req, res) => {
   const options = {
     responseType: "arraybuffer",
     responseEncoding: "binary", //windows-1250
-    method: "GET",
+    method: "POST",
     headers: { "content-type": "application/x-www-form-urlencoded" },
+    data: data,
     url: "https://cernyrytir.cz/index.php3?akce=995",
+    params: {
+      akce: "995",
+    },
   };
 
   callAxios(options);
