@@ -1,10 +1,11 @@
 const cheerio = require("cheerio"),
   axios = require("axios"),
   qs = require("qs"),
-  https = require("https");
+  https = require("https"),
+  vision = require("@google-cloud/vision");
 exports.uploadCard = async (req, res) => {
   console.log("TEST");
-  const vision = require("@google-cloud/vision");
+
   const client = new vision.ImageAnnotatorClient({
     keyFilename: "apikey.json",
   });
@@ -37,7 +38,9 @@ exports.uploadCard = async (req, res) => {
     }),
   };
 
-  callAxios(options);
+  const parsedResult = await callAxios(options);
+  res.send(parsedResult);
+
   function callAxios(options) {
     return axios(options).then((response) => {
       const sResponseData = response.data.toString("latin1");
@@ -67,8 +70,7 @@ exports.uploadCard = async (req, res) => {
         };
         return returnObject;
       });
-
-      res.send(parsedResult);
+      return parsedResult;
     });
   }
 };
