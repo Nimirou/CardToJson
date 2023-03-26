@@ -21,9 +21,8 @@ exports.uploadCard = async (req, res) => {
   const options = {
     responseType: "arraybuffer",
     responseEncoding: "binary", //windows-1250
-    method: "POST",
+    method: "GET",
     headers: { "content-type": "application/x-www-form-urlencoded" },
-    data: data,
     url: "www.cernyrytir.cz/index.php3?akce=995",
   };
 
