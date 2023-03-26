@@ -14,9 +14,6 @@ exports.uploadCard = async (req, res) => {
       const [result] = await client.textDetection(filePath);
       const detections = result.textAnnotations;
       const sCardName = detections[0].description.split("\n")[0];
-
-      console.log("Card name detected:", sCardName);
-
       return sCardName;
     } catch (err) {
       console.error("Error in image processing:", err);
@@ -27,6 +24,7 @@ exports.uploadCard = async (req, res) => {
   // Example usage:
   console.log(req.file.path);
   const sCardName = await processImage(req.file.path);
+  fs.unlinkSync(req.file.path);
   console.log(sCardName);
   let data = qs.stringify({
     x: 0,
