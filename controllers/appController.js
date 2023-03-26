@@ -11,7 +11,6 @@ exports.uploadCard = async (req, res) => {
   console.log("client");
   // Performs text detection on the local file
   const [result] = await client.textDetection(req.file.path);
-  console.log("result");
   const detections = result.textAnnotations;
   const sCardName = detections[0].description.split("\n")[0];
   console.log(sCardName);
