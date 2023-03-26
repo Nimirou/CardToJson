@@ -17,6 +17,7 @@ exports.uploadCard = async (req, res) => {
   }
 
   // Example usage:
+  console.log(req.file.path);
   const sCardName = await processImage(req.file.path);
   console.log(sCardName);
   let data = qs.stringify({
