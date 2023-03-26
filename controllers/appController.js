@@ -5,17 +5,23 @@ const cheerio = require("cheerio"),
   vision = require("@google-cloud/vision");
 exports.uploadCard = async (req, res) => {
   async function processImage(filePath) {
-    console.log("processing image...");
-    const client = new vision.ImageAnnotatorClient({
-      keyFilename: "apikey.json",
-    });
+    console.log("Processing image...");
+    try {
+      const client = new vision.ImageAnnotatorClient({
+        keyFilename: "apikey.json",
+      });
 
-    const [result] = await client.textDetection(filePath);
-    const detections = result.textAnnotations;
-    console.log("Detections: ", detections);
-    const sCardName = detections[0].description.split("\n")[0];
-    console.log("card name:", sCardName);
-    return sCardName;
+      const [result] = await client.textDetection(filePath);
+      const detections = result.textAnnotations;
+      const sCardName = detections[0].description.split("\n")[0];
+
+      console.log("Card name detected:", sCardName);
+
+      return sCardName;
+    } catch (err) {
+      console.error("Error in image processing:", err);
+      throw err;
+    }
   }
 
   // Example usage:
