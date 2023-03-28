@@ -10,8 +10,8 @@ var cors = require("cors");
 app.use(cors());
 app.use("/", routes);
 
-app.createServer(options, app).listen(PORT, () => {
-  console.log(`Server running on ${PORT}`);
+app.listen(3000, "localhost", () => {
+  console.log("Listening for request");
 });
 
 module.exports = app;
