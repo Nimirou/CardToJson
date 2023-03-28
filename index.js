@@ -10,7 +10,7 @@ var cors = require("cors");
 app.use(cors());
 app.use("/", routes);
 
-https.createServer(options, app).listen(PORT, () => {
+app.createServer(options, app).listen(PORT, () => {
   console.log(`Server running on ${PORT}`);
 });
 
