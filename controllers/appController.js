@@ -55,12 +55,30 @@ exports.uploadCard = async (req, res) => {
     }),
   };
 
+  const scryfallOptions = {
+    method: "GET",
+    headers: { "content-type": "application/x-www-form-urlencoded" },
+    data: data,
+    url: "https://api.scryfall.com/cards/named?exact=" + sCardName
+  };
+
   const parsedResult = await callAxios(options);
-  res.send(parsedResult);
+  const scryfallDetail = await callAxios(scryfallOptions);
+
+  Promise.all([parsedResult, scryfallDetail]).then(allResults => {
+    const blackKnightResponseResult = blackKnightResponse(allResults[0]);
+    console.log(blackKnightResponseResult);
+   // res.send(parsedResult);
+  })
 
   function callAxios(options) {
-    return axios(options).then((response) => {
-      const sResponseData = response.data.toString("latin1");
+    return axios(options).then((response) => {      
+      return response;
+    }).catch(err => console.log(err));
+  }
+
+  function blackKnightResponse(response){
+    const sResponseData = response.data.toString("latin1");
       const $ = cheerio.load(sResponseData);
       let sValues = $(".kusovkytext").text();
       const aValuesSplit = sValues.split("\n");
@@ -100,6 +118,5 @@ exports.uploadCard = async (req, res) => {
         return returnObject;
       });
       return parsedResult;
-    }).catch(err => console.log(err));
-  }
+  };
 };
