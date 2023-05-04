@@ -74,16 +74,28 @@ exports.uploadCard = async (req, res) => {
       });
       const newS = aValues.join("/");
       aValues = newS.split("Kè/");
-
+    
       const parsedResult = aValues.map((item) => {
         const splitItem = item.split("/");
+        let sType;
+        try{
+          sType = splitItem[2].replace("\x97 ", "/ ");
+        }catch(err){
+          sType =  splitItem[2];
+        }
+        let Price;
+        try{
+          Price = splitItem[5].replace(/\D/g, "")
+        }catch(err){
+          Price =  splitItem[5];
+        }
         const returnObject = {
           name: splitItem[0],
           edition: splitItem[1],
-          type: splitItem[2].replace("\x97 ", "/ "),
+          type: sType,
           rarity: splitItem[3],
           stock: splitItem[4],
-          price: splitItem[5].replace(/\D/g, ""),
+          price: Price,
         };
         return returnObject;
       });
