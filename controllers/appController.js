@@ -11,7 +11,7 @@ exports.uploadCardGet = (req, res) => {
 };
 exports.uploadCard = async (req, res) => {
   async function processImage(filePath) {
-    console.log("Processing image...");
+    console.log("Processing image....");
     try {
       const client = new vision.ImageAnnotatorClient({
         keyFilename: "apikey.json",
