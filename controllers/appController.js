@@ -88,6 +88,6 @@ exports.uploadCard = async (req, res) => {
         return returnObject;
       });
       return parsedResult;
-    });
+    }).catch(err => console.log(err));
   }
 };
